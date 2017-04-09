@@ -1,12 +1,12 @@
 from unittest.mock import Mock
-from bumbum.bumbum import BumBum
+from bumbum.bumbum import VideoDownloadThread
 
 
 def test_uses_youtube_dl():
     lib = Mock()
     lib.process_ie_result.return_value = {'formats': ['first format']}
-    bum = BumBum(lib)
+    vid = VideoDownloadThread('https://www.youtube.com/watch?v=liW-kWFiXtQ', lib)
 
-    bum.download('https://www.youtube.com/watch?v=liW-kWFiXtQ')
+    vid.download()
 
     assert lib.process_info.called
